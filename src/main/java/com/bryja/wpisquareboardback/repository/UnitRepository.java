@@ -32,4 +32,17 @@ public interface UnitRepository extends JpaRepository<Unit, Long> {
     @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     @Query("SELECT u FROM Unit u WHERE u.game.id = :gameId AND u.position = :position AND u.status = :status")
     Optional<Unit> findByGameIdAndPositionAndStatusForUpdate(Long gameId, Position position, UnitStatus status);
+
+
+
+//    @Lock(LockModeType.PESSIMISTIC_WRITE)
+//    @Query("SELECT u FROM Unit u WHERE u.id = :unitId AND u.game.id = :gameId")
+//    Optional<Unit> findByIdAndGameIdForCommand(Long unitId, Long gameId);
+//
+//
+//    @Lock(LockModeType.PESSIMISTIC_WRITE)
+//    @Query("SELECT u FROM Unit u WHERE u.game.id = :gameId AND u.position = :position AND u.status = :status")
+//    Optional<Unit> findUnitAtPositionForUpdateWithLock(Long gameId, Position position, UnitStatus status);
+
+
 }

@@ -53,6 +53,10 @@ public class CommandService {
             actingUnit = unitRepository.findByIdAndGameIdForUpdate(unitId, gameId)
                     .orElseThrow(() -> new UnitNotFoundException("Unit " + unitId + " not found in game " + gameId));
 
+//            actingUnit = unitRepository.findByIdAndGameIdForCommand(unitId, gameId)
+//                    .orElseThrow(() -> new UnitNotFoundException("Unit " + unitId + " not found in game " + gameId));
+
+
             Game game = actingUnit.getGame();
 
             // 2. some validations
@@ -67,6 +71,7 @@ public class CommandService {
                 case MOVE:
                     targetPosition = validateAndGetTargetPosition(request, "MOVE");
                     resultDescription = handleMoveCommand(game, actingUnit, targetPosition);
+
                     break;
                 case SHOOT:
                     targetPosition = validateAndGetTargetPosition(request, "SHOOT");
