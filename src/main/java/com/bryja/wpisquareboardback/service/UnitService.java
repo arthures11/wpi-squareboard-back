@@ -2,7 +2,6 @@ package com.bryja.wpisquareboardback.service;
 
 import com.bryja.wpisquareboardback.repository.*;
 import com.bryja.wpisquareboardback.model.*;
-import com.bryja.wpisquareboardback.config.*;
 import com.bryja.wpisquareboardback.exception.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -13,15 +13,12 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**") // Apply CORS to paths starting with /api/
-                        // IMPORTANT: For development, allow your Angular origin
+                registry.addMapping("/api/**")
                         .allowedOrigins("http://localhost:4200")
-                        // For production, replace with your actual frontend domain(s):
-                        // .allowedOrigins("https://your-frontend-domain.com", "https://www.your-frontend-domain.com")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS") // Allowed HTTP methods
-                        .allowedHeaders("*") // Allow all headers (can be restricted)
-                        .allowCredentials(true) // If you need cookies/session support (often not needed for stateless APIs)
-                        .maxAge(3600); // Cache preflight response for 1 hour
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true)
+                        .maxAge(3600);
             }
         };
     }

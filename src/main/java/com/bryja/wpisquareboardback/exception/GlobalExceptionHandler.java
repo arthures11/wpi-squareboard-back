@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CooldownException.class)
     public ResponseEntity<ErrorResponse> handleCooldownException(CooldownException ex) {
         log.warn("Cooldown restriction: {}", ex.getMessage());
-        return buildErrorResponse(ex, HttpStatus.TOO_MANY_REQUESTS); // 429
+        return buildErrorResponse(ex, HttpStatus.TOO_MANY_REQUESTS);
     }
 
     @ExceptionHandler(ConcurrencyConflictException.class)
@@ -78,16 +78,16 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(ex, HttpStatus.INTERNAL_SERVER_ERROR, "An internal server error occurred.");
     }
 
-    @ExceptionHandler(OptimisticLockingFailureException.class) // Catch this exception
+    @ExceptionHandler(OptimisticLockingFailureException.class)
     public ResponseEntity<ErrorResponse> handleOptimisticLockingFailure(OptimisticLockingFailureException ex) {
         String message = "Action failed due to a conflict with another simultaneous command. Please refresh and try again.";
-        log.warn("OptimisticLockingFailureException: {} - Cause: {}", message, ex.getMessage()); // Log the warning
+        log.warn("OptimisticLockingFailureException: {} - Cause: {}", message, ex.getMessage());
         return buildErrorResponse(ex, HttpStatus.CONFLICT, message);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponse> handleMessageNotReadable(HttpMessageNotReadableException ex) {
-        String specificMessage = "Invalid request body format or value."; // Default message
+        String specificMessage = "Invalid request body format or value.";
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
         Throwable cause = ex.getRootCause();
@@ -98,7 +98,7 @@ public class GlobalExceptionHandler {
             if (ife.getTargetType() != null && ife.getTargetType().isEnum()) {
                 String enumValues = Arrays.stream(ife.getTargetType().getEnumConstants())
                         .map(Object::toString)
-                        .collect(Collectors.joining("', '", "'", "'")); // Format as 'VALUE1', 'VALUE2'
+                        .collect(Collectors.joining("', '", "'", "'"));
 
                 String fieldPath = ife.getPath().stream()
                         .map(JsonMappingException.Reference::getFieldName)
@@ -107,7 +107,7 @@ public class GlobalExceptionHandler {
 
                 specificMessage = String.format("Invalid value '%s' for field '%s'. Must be one of: [%s]",
                         ife.getValue(),
-                        fieldPath.isEmpty() ? "enum property" : fieldPath, // Use field path if available
+                        fieldPath.isEmpty() ? "enum property" : fieldPath,
                         enumValues);
             }
         } else if (cause instanceof JsonMappingException) {
@@ -122,7 +122,7 @@ public class GlobalExceptionHandler {
 
         log.warn("Bad Request - Message Not Readable. Root cause: {} - Field: {}",
                 cause != null ? cause.getClass().getSimpleName() : "N/A",
-                specificMessage); // Log useful info
+                specificMessage);
         return buildErrorResponse(ex, status, specificMessage);
     }
 
