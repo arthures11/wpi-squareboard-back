@@ -81,7 +81,7 @@ class UnitRepositoryTest {
     void findByGameIdAndPositionAndStatus_whenUnitDestroyed_returnsEmptyForActiveStatus() {
         Position destroyedPos = new Position(2, 2);
         Optional<Unit> unitOpt = unitRepository.findByGameIdAndPositionAndStatus(testGame.getId(), destroyedPos, UnitStatus.ACTIVE);
-        assertThat(unitOpt).isNotPresent(); // Should not find if looking for ACTIVE
+        assertThat(unitOpt).isNotPresent();
     }
 
     @Test

@@ -16,7 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.dao.OptimisticLockingFailureException; // Import Spring exception
+import org.springframework.dao.OptimisticLockingFailureException;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

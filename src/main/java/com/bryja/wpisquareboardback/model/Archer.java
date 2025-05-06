@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @DiscriminatorValue("ARCHER")
-@NoArgsConstructor // Keep if needed for JPA/Frameworks
+@NoArgsConstructor
 public class Archer extends Unit {
     public Archer(Game game, PlayerColor playerColor, Position position) {
         super(game, playerColor, position);
