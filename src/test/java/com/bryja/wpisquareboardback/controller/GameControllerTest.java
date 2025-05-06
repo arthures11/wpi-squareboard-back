@@ -130,7 +130,7 @@ class GameControllerTest {
                 .andExpect(status().isNotFound()) // Expect 404
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.message", is(errorMessage)));
-        
+
         verify(dtoMapper, never()).toGameDTO(any());
     }
 
